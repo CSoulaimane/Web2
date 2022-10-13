@@ -62,6 +62,66 @@ router.get('/:id', (req, res) => {
   });
   
 
+// Create a pizza to be added to the menu.
+router.post('/', (req, res) => {
+  const title = req?.body?.title?.length !== 0 ? req.body.title : undefined;
+  const content = req?.body?.content?.length !== 0 ? req.body.content : undefined;
+
+  console.log('POST /pizzas');
+
+  if (!title || !content) return res.sendStatus(400); // error code '400 Bad request'
+
+  const lastItemIndex = MENU?.length !== 0 ? MENU.length - 1 : undefined;
+  const lastId = lastItemIndex !== undefined ? MENU[lastItemIndex]?.id : 0;
+  const nextId = lastId + 1;
+
+  const newPizza = {
+    id: nextId,
+    title: title,
+    content: content,
+  };
+
+  MENU.push(newPizza);
+
+  res.json(newPizza);
+});
+
+// Delete a pizza from the menu based on its id
+router.delete('/:id', (req, res) => {
+  console.log(`DELETE /pizzas/${req.params.id}`);
+console.log("ici");
+  const foundIndex = MENU.findIndex(pizza => pizza.id == req.params.id);
+console.log( " index "+foundIndex);
+  if (foundIndex < 0) return res.sendStatus(404);
+
+  const itemsRemovedFromMenu = MENU.splice(foundIndex, 1);
+  const itemRemoved = itemsRemovedFromMenu[0];
+
+  res.json(itemRemoved);
+});
+
+// Update a pizza based on its id and new values for its parameters
+router.patch('/:id', (req, res) => {
+  console.log(`PATCH /pizzas/${req.params.id}`);
+
+  const title = req?.body?.title;
+  const content = req?.body?.content;
+
+  console.log('POST /pizzas');
+
+  if ((!title && !content) || title?.length === 0 || content?.length === 0) return res.sendStatus(400);
+
+  const foundIndex = MENU.findIndex(pizza => pizza.id == req.params.id);
+
+  if (foundIndex < 0) return res.sendStatus(404);
+
+  const updatedPizza = {...MENU[foundIndex], ...req.body};
+
+  MENU[foundIndex] = updatedPizza;
+
+  res.json(updatedPizza);
+});
+
 
 
 
