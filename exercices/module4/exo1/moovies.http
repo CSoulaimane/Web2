@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/moovies/1
+
+
+
+###
+GET {{baseUrl}}/moovies/?minimum-duration=230

@@ -3,6 +3,14 @@
 GET {{baseUrl}}/pizzas/
 
 
+
+
+### Read all pizzas sorted by title (ascending)
+GET {{baseUrl}}/pizzas/?order=title
+
+### Read all pizzas sorted by title (descending)
+GET {{baseUrl}}/pizzas/?order=-title
+
 ### Create a pizza
 POST {{baseUrl}}/pizzas
 Content-Type: application/json

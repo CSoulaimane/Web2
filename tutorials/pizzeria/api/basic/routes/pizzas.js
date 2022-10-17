@@ -35,11 +35,15 @@ const MENU = [
    GET /pizzas?order=-title : descending order by title
 */
 router.get('/', (req, res, next) => {
+
+  let string="order"
     const orderByTitle =
-      req?.query?.order?.includes('title')
+      req?.query?.string?.includes('title')
         ? req.query.order
         : undefined;
     let orderedMenu;
+
+    console.log("query.order : "+ req.query.order+"query "+req.query+"dernier: "+ req.query.title);
     console.log(`order by ${orderByTitle ?? 'not requested'}`);
     if (orderByTitle)
       orderedMenu = [...MENU].sort((a, b) => a.title.localeCompare(b.title));
