@@ -14,6 +14,8 @@ window.addEventListener('click', () => {
     console.log('onClickHandlerForBtn1::click');
     nombre++;
 
+
+
     
 return;
   });
