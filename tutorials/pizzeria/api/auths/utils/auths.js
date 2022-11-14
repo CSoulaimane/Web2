@@ -10,7 +10,6 @@ const authorize = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, jwtSecret);
     const { username } = decoded;
-
     const existingUser = readOneUserFromUsername(username);
 
     if (!existingUser) return res.sendStatus(401);

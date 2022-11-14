@@ -17,14 +17,12 @@ const router = express.Router();
 */
 router.get('/', (req, res) => {
   const allPizzasPotentiallyOrdered = readAllPizzas(req?.query?.order);
-
   return res.json(allPizzasPotentiallyOrdered);
 });
 
 // Read the pizza identified by an id in the menu
 router.get('/:id', (req, res) => {
   const foundPizza = readOnePizza(req.params.id);
-
   if (!foundPizza) return res.sendStatus(404);
 
   return res.json(foundPizza);
