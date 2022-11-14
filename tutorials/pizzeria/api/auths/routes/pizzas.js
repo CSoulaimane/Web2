@@ -24,7 +24,6 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const foundPizza = readOnePizza(req.params.id);
   if (!foundPizza) return res.sendStatus(404);
-
   return res.json(foundPizza);
 });
 
